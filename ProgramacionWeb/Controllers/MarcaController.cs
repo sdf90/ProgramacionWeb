@@ -19,6 +19,7 @@ namespace ProgramacionWeb.Controllers
             {
                 //Obtener todo lo que tenemos en la tabla MARCA
                 listaMarca = (from marca in bd.Marca
+                              where marca.BHABILITADO == 1
                                              select new MarcaCLS
                                              {
                                                  iidmarca = marca.IIDMARCA,
