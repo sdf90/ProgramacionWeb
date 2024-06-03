@@ -20,8 +20,6 @@ namespace ProgramacionWeb.Models
 
         public DateTime fechaApertura { get; set; }
 
-
-
-
+        public int bhabilitado { get; set; }
     }
 }
