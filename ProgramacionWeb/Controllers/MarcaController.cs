@@ -34,5 +34,42 @@ namespace ProgramacionWeb.Controllers
 
             return View(listaMarca);
         }
+
+
+        //Método que nos lleva a la vista Agregar
+        public ActionResult Agregar()
+        {
+            return View();
+        }
+
+        //Método que recibirá el formulario de la vista y que será de tipo POST
+        [HttpPost]
+        public ActionResult Agregar(MarcaCLS oMarcaCLS)
+        {
+            //Comprobar si no hay errores en el formulario
+            if (!ModelState.IsValid)
+            {
+                //Si hay error volvemos  a la página
+                return View(oMarcaCLS);
+            }
+            else{
+                //Inserta datos
+                using(var bd = new BDPasajeEntities())
+                {
+
+                    Marca oMarca = new Marca();
+
+                    oMarca.NOMBRE = oMarcaCLS.nombre;
+                    oMarca.DESCRIPCION = oMarcaCLS.descripcion;
+                    oMarca.BHABILITADO = 1;
+                    bd.Marca.Add(oMarca);
+                    bd.SaveChanges();
+                } 
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
