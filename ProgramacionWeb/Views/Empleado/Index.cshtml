@@ -6,7 +6,11 @@
 
 <h2>Index</h2>
 
-<table class="table table-hover table-bordered" >
+@*Agregar un boton con estilos*@
+@Html.ActionLink("Agregar", "Agregar", "Empleado", null, new { @class = "btn btn-primary" })
+
+
+<table class="table table-hover table-bordered">
     <thead>
 
         <tr>
@@ -19,18 +23,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in Model)
-            {
-                <tr>
-                    <td>@item.iidEmpleado</td>
-                    <td>@item.nombre</td>
-                    <td>@item.appaterno</td>
-                    <td>@item.apmaterno</td>
-                    <td>@item.nombreTipoContrato</td>
-                    <td>@item.nombreTipoUsuario</td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.iidEmpleado</td>
+                <td>@item.nombre</td>
+                <td>@item.appaterno</td>
+                <td>@item.apmaterno</td>
+                <td>@item.nombreTipoContrato</td>
+                <td>@item.nombreTipoUsuario</td>
 
-                </tr>
-            }
+            </tr>
+        }
     </tbody>
 
 </table>

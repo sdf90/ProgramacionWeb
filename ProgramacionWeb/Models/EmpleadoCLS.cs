@@ -39,13 +39,22 @@ namespace ProgramacionWeb.Models
 
         [Display(Name = "Tipo Usuario")]
         [Required]
-        public int iidttipoUsuario { get; set; }
+        public int iidtipoUsuario { get; set; }
+
+        [Display(Name = "Tipo Contrato")]
+        [Required]
+        public int iidttipoContrato { get; set; }
 
         [Display(Name = "Sexo")]
         [Required]
         public int iidSexo { get; set; }
 
         public int bhabilitado{ get; set; }
+
+        [Required]
+        [Display(Name = "Sueldo")]
+        [Range(0,10000,ErrorMessage ="Fuera de rango")]
+        public decimal sueldo { get; set; }
 
 
         ///Propiedade adicionlaes
