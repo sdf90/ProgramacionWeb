@@ -64,5 +64,31 @@ namespace ProgramacionWeb.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult Editar(int id)
+        {
+            SucursalCLS oSucursalCLS = new SucursalCLS();
+            using(var bd = new BDPasajeEntities())
+            {
+
+                Sucursal oSucurcal = bd.Sucursal.Where(p => p.IIDSUCURSAL.Equals(id)).First();
+                oSucursalCLS.iidsucusal = oSucurcal.IIDSUCURSAL;
+                oSucursalCLS.nombre = oSucurcal.NOMBRE;
+                oSucursalCLS.direccion = oSucurcal.DIRECCION;
+                oSucursalCLS.email = oSucurcal.EMAIL;
+                oSucursalCLS.telefono = oSucurcal.TELEFONO;
+                oSucursalCLS.fechaApertura = (DateTime)oSucurcal.FECHAAPERTURA;
+
+
+
+
+            }
+
+
+            return View(oSucursalCLS);
+        }
+
+
     }
 }
