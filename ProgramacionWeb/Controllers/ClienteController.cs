@@ -101,5 +101,34 @@ namespace ProgramacionWeb.Controllers
             }
         }
 
+
+
+        public ActionResult Editar(int id)
+        {
+
+
+            ClienteCLS oClienteCLS = new ClienteCLS();
+            using(var bd = new BDPasajeEntities())
+            {
+                Cliente oCliente = bd.Cliente.Where(p => p.IIDCLIENTE.Equals(id)).First();
+                oClienteCLS.iidcliente = oCliente.IIDCLIENTE;
+                oClienteCLS.nombre = oCliente.NOMBRE;
+                oClienteCLS.apmaterno = oCliente.APMATERNO;
+                oClienteCLS.appaterno = oCliente.APPATERNO;
+                oClienteCLS.direccion = oCliente.DIRECCION;
+                oClienteCLS.email = oCliente.EMAIL;
+                oClienteCLS.iidsexo = (int)oCliente.IIDSEXO;
+                oClienteCLS.telefonocelular = oCliente.TELEFONOCELULAR;
+                oClienteCLS.telefonofijo = oCliente.TELEFONOFIJO;
+
+                //Lamamanos al método donde se obtendrá el sexo para la vista otra vez
+                llenarSexo();
+                //ViewBag permite pasar información del controller a la vista
+                ViewBag.lista = listaSexo;
+            }
+
+            return View(oClienteCLS);
+        }
+
     }
 }

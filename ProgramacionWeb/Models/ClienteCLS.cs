@@ -30,8 +30,11 @@ namespace ProgramacionWeb.Models
         public string email { get; set; }
         [Required]
         [Display(Name = "Direccion")]
+       
         [StringLength(200, ErrorMessage = "Longitud máxima 200")]
+        [DataType(DataType.MultilineText)]
         public string direccion { get; set; }
+
         [Required]
         [Display(Name = "Sexo")]
         public int iidsexo { get; set; }

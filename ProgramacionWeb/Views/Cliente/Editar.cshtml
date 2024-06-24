@@ -1,16 +1,16 @@
 ﻿@using ProgramacionWeb.Models
 @model ClienteCLS
 @{
-    ViewBag.Title = "Agregar";
-
+    ViewBag.Title = "Editar";
     List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.lista;
 }
 
-<h2>Agregar</h2>
+<h2>Editar</h2>
 
-<div class="row" >
+
+<div class="row">
     <div class="col-md-">
-        @using (Html.BeginForm("Agregar", "Cliente", FormMethod.Post))
+        @using (Html.BeginForm("Editar", "Cliente", FormMethod.Post))
         {
 
             <div>
@@ -45,7 +45,7 @@
 
             <div>
                 @Html.LabelFor(p => p.iidsexo)
-                @Html.DropDownList("iidsexo", listaSexo, null, new {@class="form-control"})
+                @Html.DropDownList("iidsexo", listaSexo, null, new { @class = "form-control" })
                 @Html.ValidationMessage("iidsexo", new { @class = "text-danger" })
             </div>
 
@@ -64,7 +64,7 @@
             <br />
 
             <div style="margin:auto">
-                <input type="submit" value="Enviar" class="btn btn-primary"/>
+                <input type="submit" value="Enviar" class="btn btn-primary" />
             </div>
         }
     </div>
