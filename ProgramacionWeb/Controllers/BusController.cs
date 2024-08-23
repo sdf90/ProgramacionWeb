@@ -42,5 +42,114 @@ namespace ProgramacionWeb.Controllers
 
             return View(listaBus);
         }
+
+        //Metodo para  mostrar la vista agregar
+        public ActionResult Agregar()
+        {
+            listarCombos();
+            return View();
+        }
+
+        //Metodos para listar datos en los ComboBox
+        public void listarTicoBus()
+        {
+            //agegar
+            List<SelectListItem> lista;
+
+            using (var bd = new BDPasajeEntities())
+            {
+                lista = (from item in bd.TipoBus
+                         where item.BHABILITADO == 1
+                         select new SelectListItem
+                         {
+                             Text = item.NOMBRE,
+                             Value = item.IIDTIPOBUS.ToString()
+                         }).ToList();
+            }
+
+            lista.Insert(0, new SelectListItem { Text = "-- Seleccionar --", Value = "" });
+
+            //PAsama la lista a la vista
+            ViewBag.listaTipoBus = lista;
+        }
+
+
+        public void listarTicoMarca()
+        {
+            //agegar
+            List<SelectListItem> lista;
+
+            using (var bd = new BDPasajeEntities())
+            {
+                lista = (from item in bd.Marca
+                         where item.BHABILITADO == 1
+                         select new SelectListItem
+                         {
+                             Text = item.NOMBRE,
+                             Value = item.IIDMARCA.ToString()
+                         }).ToList();
+            }
+
+            lista.Insert(0, new SelectListItem { Text = "-- Seleccionar --", Value = "" });
+
+            //PAsama la lista a la vista
+            ViewBag.listaMarca = lista;
+        }
+
+        public void listarTicoModelo()
+        {
+            //agegar
+            List<SelectListItem> lista;
+
+            using (var bd = new BDPasajeEntities())
+            {
+                lista = (from item in bd.Modelo
+                         where item.BHABILITADO == 1
+                         select new SelectListItem
+                         {
+                             Text = item.NOMBRE,
+                             Value = item.IIDMODELO.ToString()
+                         }).ToList();
+            }
+
+            lista.Insert(0, new SelectListItem { Text = "-- Seleccionar --", Value = "" });
+
+            //PAsama la lista a la vista
+            ViewBag.listaModelo = lista;
+        }
+
+
+
+        public void listarSucursal()
+        {
+            //agegar
+            List<SelectListItem> lista;
+
+            using (var bd = new BDPasajeEntities())
+            {
+                lista = (from item in bd.Sucursal
+                         where item.BHABILITADO == 1
+                         select new SelectListItem
+                         {
+                             Text = item.NOMBRE,
+                             Value = item.IIDSUCURSAL.ToString()
+                         }).ToList();
+            }
+
+            lista.Insert(0, new SelectListItem { Text = "-- Seleccionar --", Value = "" });
+
+            //PAsama la lista a la vista
+            ViewBag.listaSucursal = lista;
+        }
+
+        //metodo para llamar a todos los comboBox
+        public void listarCombos()
+        {
+            listarSucursal();
+            listarTicoBus();
+            listarTicoMarca();
+            listarTicoModelo();
+        }
+
     }
 }

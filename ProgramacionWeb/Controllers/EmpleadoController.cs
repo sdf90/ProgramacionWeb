@@ -157,6 +157,39 @@ namespace ProgramacionWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        //Metodo para mostrar los datos del empleado en la vista
+        public ActionResult Editar(int id)
+        {
+            listarCombos();
+
+            EmpleadoCLS oEmpleadoCLS = new EmpleadoCLS();
+
+            using(var bd = new BDPasajeEntities())
+            {
+                Empleado oEmpleado = bd.Empleado.Where(p => p.IIDEMPLEADO.Equals(id)).First();
+                
+                oEmpleadoCLS.iidEmpleado = oEmpleado.IIDEMPLEADO;
+                oEmpleadoCLS.nombre = oEmpleado.NOMBRE;
+                oEmpleadoCLS.iidSexo = (int)oEmpleado.IIDSEXO;
+                oEmpleadoCLS.apmaterno = oEmpleado.APMATERNO;
+                oEmpleadoCLS.appaterno = oEmpleado.APPATERNO;
+                oEmpleadoCLS.fechaContrato = (DateTime)oEmpleado.FECHACONTRATO;
+                oEmpleadoCLS.sueldo = (decimal)oEmpleado.SUELDO;
+                oEmpleadoCLS.iidtipoUsuario = (int)oEmpleado.IIDTIPOUSUARIO;
+                oEmpleadoCLS.iidttipoContrato = (int)oEmpleado.IIDTIPOCONTRATO;
+
+
+
+            }
+
+            return View(oEmpleadoCLS);
+        }
+
+
+
+
+
+
 
     }
 }
