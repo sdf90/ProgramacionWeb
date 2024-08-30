@@ -186,5 +186,40 @@ namespace ProgramacionWeb.Controllers
             listarTicoModelo();
         }
 
+
+        //Editar
+
+        public ActionResult Editar(int id)
+        {
+            BusCLS oBucCls = new BusCLS();
+
+            listarCombos();
+
+
+            using(var bd = new BDPasajeEntities())
+            {
+                Bus obus = bd.Bus.Where(p => p.IIDBUS.Equals(id)).First();
+
+                oBucCls.iidBus = obus.IIDBUS;
+                oBucCls.iidMarca = (int)obus.IIDMARCA;
+                oBucCls.iidSucursal = (int)obus.IIDSUCURSAL;
+                oBucCls.iidTipoBus = (int)obus.IIDTIPOBUS;
+                oBucCls.placa = obus.PLACA;
+
+                oBucCls.fechaCompra = (DateTime)obus.FECHACOMPRA;
+                oBucCls.iidMoelo = (int) obus.IIDMODELO;
+                oBucCls.numeroColumnas = (int)obus.NUMEROCOLUMNAS;
+                oBucCls.numeroFilas =(int) obus.NUMEROFILAS;
+
+                oBucCls.descripcion = obus.DESCRIPCION;
+                oBucCls.observacion = obus.OBSERVACION;
+
+
+            }
+
+
+            return View(oBucCls);
+        }
+
     }
 }
