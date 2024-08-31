@@ -90,5 +90,31 @@ namespace ProgramacionWeb.Controllers
             return View(oMarcaCLS);
         }
 
+
+        [HttpPost]
+        public ActionResult Editar(MarcaCLS oMarcaCls)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(oMarcaCls);
+            }
+            int idMarca = oMarcaCls.iidmarca;
+            using(var bd = new BDPasajeEntities())
+            {
+                Marca oMarca = bd.Marca.Where(p => p.IIDMARCA.Equals(idMarca)).First();
+
+                oMarca.NOMBRE = oMarcaCls.nombre;
+
+                oMarca.DESCRIPCION = oMarcaCls.descripcion;
+
+               bd.SaveChanges();
+            }
+
+                return RedirectToAction("Index");
+
+
+        }
+
     }
 }

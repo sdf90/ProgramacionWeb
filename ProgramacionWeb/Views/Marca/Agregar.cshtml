@@ -10,7 +10,7 @@
     <div class="col-md-6">
 
         @*Formulario que mandara nuestra información al método Agregar de POST*@
-        @using (Html.BeginForm("Agregar", "Marca", FormMethod.Post))
+        @using (Html.BeginForm("Agregar", "Marca", FormMethod.Post,new { @id = "frmAgregar"}))
         {
 
             <div>
@@ -39,3 +39,16 @@
     </div>
 
 </div>
+
+<script>
+    //MOSTRAR UN MENSAJE CUANDO PULSAMOS EL BOTÓN GUARDAR
+    var frmAgregar = document.getElementById("frmAgregar");
+    frmAgregar.onsubmit = function (e) {
+        //Evitamos que al pulsar el botón de guardar haga algo el formulario
+        e.preventDefault();
+
+        if (confirm("¿Deseas guardar los cambios?") == 1) {
+            frmAgregar.submit();
+        }
+    }
+</script>
