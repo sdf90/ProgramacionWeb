@@ -8,7 +8,7 @@
 
 <h2>Agregar</h2>
 
-<div class="row" >
+<div class="row">
     <div class="col-md-">
         @using (Html.BeginForm("Agregar", "Cliente", FormMethod.Post))
         {
@@ -45,7 +45,7 @@
 
             <div>
                 @Html.LabelFor(p => p.iidsexo)
-                @Html.DropDownList("iidsexo", listaSexo, null, new {@class="form-control"})
+                @Html.DropDownList("iidsexo", listaSexo, null, new { @class = "form-control" })
                 @Html.ValidationMessage("iidsexo", new { @class = "text-danger" })
             </div>
 
@@ -64,8 +64,49 @@
             <br />
 
             <div style="margin:auto">
-                <input type="submit" value="Enviar" class="btn btn-primary"/>
+                @*<input type="submit" value="Enviar" class="btn btn-primary" />*@
+
+                <button id="myInput" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                    Enviar doc
+                </button>
             </div>
         }
     </div>
 </div>
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="modalConfirm"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">¿Desea guardar los cambios?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div style="padding:1em">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+
+  //MOSTRAR EL MODAL DE CONFIRMACIÓN
+
+    $(document).ready(function () {
+        $("#myInput").click(function () {
+            $("#modalConfirm").modal('show');
+        });
+    });
+
+
+</script>
