@@ -1,0 +1,55 @@
+﻿@using ProgramacionWeb.Models;
+@model MarcaCLS
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<h2>Agregar</h2>
+
+<div class="row">
+    <div class="col-md-6">
+
+        @*Formulario que mandara nuestra información al método Agregar de POST*@
+        @using (Html.BeginForm("Agregar", "Marca", FormMethod.Post,new { @id = "frmAgregar"}))
+        {
+
+            <div>
+                @*Mostramos el contenido del campo nombre que está en el modelo MarcaCLS*@
+                @Html.LabelFor(p => p.nombre)
+                @Html.TextBoxFor(p => p.nombre, new { @class = "form-control" })
+                @Html.ValidationMessage("nombre", new {@class="text-danger"})
+            </div>
+
+
+
+            <div>
+                @*Mostramos el contenido del campo descripcion que está en el modelo MarcaCLS*@
+                @Html.LabelFor(p => p.descripcion)
+                @Html.TextBoxFor(p => p.descripcion, new { @class = "form-control" })
+                @Html.ValidationMessage("descripcion", new { @class = "text-danger" })
+            </div>
+
+            <br/>
+
+            <div style="margin:auto">
+                <input type="submit" class="btn btn-primary" value="Guardar"/>
+                @Html.ActionLink("Volver", "Index", "Marca", null, new {@class="btn btn-danger"})
+            </div>
+
+        }
+    </div>
+
+</div>
+
+<script>
+    //MOSTRAR UN MENSAJE CUANDO PULSAMOS EL BOTÓN GUARDAR
+    var frmAgregar = document.getElementById("frmAgregar");
+    frmAgregar.onsubmit = function (e) {
+        //Evitamos que al pulsar el botón de guardar haga algo el formulario
+        e.preventDefault();
+
+        if (confirm("¿Deseas guardar los cambios?") == 1) {
+            frmAgregar.submit();
+        }
+    }
+</script>

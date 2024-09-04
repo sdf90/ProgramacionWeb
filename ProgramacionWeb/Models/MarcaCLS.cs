@@ -12,9 +12,12 @@ namespace ProgramacionWeb.Models
         public int iidmarca { get; set; }
 
         [Display(Name = "Nombre Marca")]
+        [Required]
+        [StringLength(100,ErrorMessage = "La longitud máxima es 100")]
         public string nombre { get; set; }
         [Display(Name = "Descripción Marca")]
-
+        [Required]
+        [StringLength(200,ErrorMessage = "La longitud máxima es de 200")]
         public string descripcion { get; set; }
 
     
