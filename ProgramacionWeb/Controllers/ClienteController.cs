@@ -130,5 +130,38 @@ namespace ProgramacionWeb.Controllers
             return View(oClienteCLS);
         }
 
+        //GUARDAR LOS CAMBIOS EN LA EDICIÓN DE UN CLIENTE
+        [HttpPost]
+        public ActionResult Editar(ClienteCLS oClienteCls)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(oClienteCls);
+            }
+
+            int idCliente = oClienteCls.iidcliente;
+
+            using(var bd = new BDPasajeEntities())
+            {
+                Cliente oCliente = bd.Cliente.Where(p => p.IIDCLIENTE.Equals(idCliente)).First();
+
+                oCliente.NOMBRE = oClienteCls.nombre;
+                oCliente.APPATERNO = oClienteCls.appaterno;
+                oCliente.APMATERNO = oClienteCls.apmaterno;
+                oCliente.DIRECCION = oClienteCls.direccion;
+                oCliente.EMAIL = oClienteCls.email;
+                oCliente.IIDSEXO = oClienteCls.iidsexo;
+                oCliente.TELEFONOCELULAR = oClienteCls.telefonocelular;
+                oCliente.TELEFONOFIJO = oClienteCls.telefonofijo;
+
+                bd.SaveChanges();
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }

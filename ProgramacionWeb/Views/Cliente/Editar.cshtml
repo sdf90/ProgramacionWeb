@@ -10,8 +10,13 @@
 
 <div class="row">
     <div class="col-md-">
-        @using (Html.BeginForm("Editar", "Cliente", FormMethod.Post))
+        @using (Html.BeginForm("Editar", "Cliente", FormMethod.Post, new { @id = "frmCliente" }))
         {
+
+            <div>
+                @Html.LabelFor(p => p.iidcliente)
+                @Html.TextBoxFor(p => p.iidcliente, new { @class = "form-control",@readOnly=true })
+            </div>
 
             <div>
                 @Html.LabelFor(p => p.nombre)
@@ -64,8 +69,64 @@
             <br />
 
             <div style="margin:auto">
-                <input type="submit" value="Enviar" class="btn btn-primary" />
+
+                <!-- Button trigger modal -->
+                <button id="myInput" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                    Guardar
+                </button>
+                @Html.ActionLink("Regresar", "Index", "Cliente", null, new { @class = "btn btn-danger" })
+
+                @*<input type="submit" value="Enviar" class="btn btn-primary" />*@
             </div>
         }
     </div>
 </div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalConfirm" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">¿Desea guardar los cambios?</h1>
+                <button type="button" onclick="Cancelar()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div style="padding:1em">
+                <button type="button" onclick="Cancelar()" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Agregar()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    //MOSTRAR EL MODAL DE CONFIRMACIÓN
+    $(document).ready(function () {
+        $("#myInput").click(function () {
+            $("#modalConfirm").modal('show');
+        });
+
+
+    });
+
+    //GUARDAR LOS DATOS DEL FORMULARIO AL PULSAR ACEPTAR
+    function Agregar() {
+
+        var frmCliente = document.getElementById("frmCliente");
+
+        frmCliente.submit();
+
+    }
+
+    //CERRAR EL MODAL
+    function Cancelar() {
+        $("#modalConfirm").modal('hide');
+    }
+
+
+</script>
