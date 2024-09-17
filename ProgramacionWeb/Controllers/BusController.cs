@@ -151,5 +151,66 @@ namespace ProgramacionWeb.Controllers
             listarTicoModelo();
         }
 
+        //Metodo para mostrar los datos del Bus en la vista
+        public ActionResult Editar(int id)
+        {
+            listarCombos();
+
+            BusCLS oBusCls = new BusCLS();
+
+            using (var bd = new BDPasajeEntities())
+            {
+                Bus oBus = bd.Bus.Where(p => p.IIDBUS.Equals(id)).First();
+
+                oBusCls.iidBus = oBus.IIDBUS;
+               oBus.IIDSUCURSAL = oBusCls.iidSucursal;
+                oBusCls.iidTipoBus = (int)oBus.IIDTIPOBUS;
+                oBusCls.placa = oBus.PLACA;
+                oBusCls.fechaCompra = (DateTime)oBus.FECHACOMPRA;
+                oBusCls.iidMoelo =(int) oBus.IIDMODELO;
+                oBusCls.numeroColumnas = (int)oBus.NUMEROCOLUMNAS;
+                oBusCls.numeroFilas = (int)oBus.NUMEROFILAS;
+                oBusCls.descripcion = oBus.DESCRIPCION;
+                oBusCls.observacion = oBus.OBSERVACION;
+                oBusCls.iidMarca = (int) oBus.IIDMARCA;
+
+            }
+
+            return View(oBusCls);
+        }
+
+
+        [HttpPost]
+        public ActionResult Editar(BusCLS oBusCls)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(oBusCls);
+            }
+
+            int idBus = oBusCls.iidBus;
+
+            using(var bd = new BDPasajeEntities())
+            {
+                Bus oBus = bd.Bus.Where(p => p.IIDBUS.Equals(idBus)).First();
+
+                oBus.IIDSUCURSAL = oBusCls.iidSucursal;
+                oBus.IIDTIPOBUS = oBusCls.iidTipoBus;
+                oBus.PLACA = oBusCls.placa;
+                oBus.FECHACOMPRA = oBusCls.fechaCompra;
+                oBus.IIDMODELO = oBusCls.iidMoelo;
+                oBus.NUMEROCOLUMNAS = oBusCls.numeroColumnas;
+                oBus.NUMEROFILAS = oBusCls.numeroFilas;
+                oBus.DESCRIPCION = oBusCls.descripcion;
+                oBus.OBSERVACION = oBusCls.observacion;
+                oBus.IIDMARCA = oBusCls.iidMarca;
+
+                bd.SaveChanges();
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

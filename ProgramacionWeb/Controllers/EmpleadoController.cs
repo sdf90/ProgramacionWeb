@@ -123,6 +123,9 @@ namespace ProgramacionWeb.Controllers
 
         public ActionResult Agregar()
         {
+
+            listarCombos();         
+
             return View();
         }
 
@@ -178,8 +181,6 @@ namespace ProgramacionWeb.Controllers
                 oEmpleadoCLS.iidtipoUsuario = (int)oEmpleado.IIDTIPOUSUARIO;
                 oEmpleadoCLS.iidttipoContrato = (int)oEmpleado.IIDTIPOCONTRATO;
 
-
-
             }
 
             return View(oEmpleadoCLS);
@@ -188,7 +189,37 @@ namespace ProgramacionWeb.Controllers
 
 
 
+        //GUARDAR LOS CAMBIOS EN LA EDICIÓN DE UN EMPLEADO
+        [HttpPost]
+        public ActionResult Editar(EmpleadoCLS oEmpleadoCLS)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(oEmpleadoCLS);
+            }
 
+            int idEmpleado = oEmpleadoCLS.iidEmpleado;
+
+            using (var bd = new BDPasajeEntities())
+            {
+                Empleado oEmpleado = bd.Empleado.Where(p => p.IIDEMPLEADO.Equals(idEmpleado)).First();
+
+                oEmpleadoCLS.iidEmpleado = oEmpleado.IIDEMPLEADO;
+                oEmpleadoCLS.nombre = oEmpleado.NOMBRE;
+                oEmpleadoCLS.iidSexo = (int)oEmpleado.IIDSEXO;
+                oEmpleadoCLS.apmaterno = oEmpleado.APMATERNO;
+                oEmpleadoCLS.appaterno = oEmpleado.APPATERNO;
+                oEmpleadoCLS.fechaContrato = (DateTime)oEmpleado.FECHACONTRATO;
+                oEmpleadoCLS.sueldo = (decimal)oEmpleado.SUELDO;
+                oEmpleadoCLS.iidtipoUsuario = (int)oEmpleado.IIDTIPOUSUARIO;
+                oEmpleadoCLS.iidttipoContrato = (int)oEmpleado.IIDTIPOCONTRATO;
+
+                bd.SaveChanges();
+
+            }
+
+            return RedirectToAction("Index");
+        }
 
 
     }

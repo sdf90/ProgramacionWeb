@@ -77,17 +77,17 @@
 
 <!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade" id="modalConfirm"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalConfirm" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">¿Desea guardar los cambios?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" onclick="Cancelar()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div style="padding:1em">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Aceptar</button>
+                <button type="button" onclick="Cancelar()" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Agregar()" class="btn btn-primary">Aceptar</button>
             </div>
         </div>
     </div>
@@ -108,6 +108,12 @@
             $("#modalConfirm").modal('show');
         });
     });
+
+
+    //CERRAR EL MODAL
+    function Cancelar() {
+        $("#modalConfirm").modal('hide');
+    }
 
 
 </script>

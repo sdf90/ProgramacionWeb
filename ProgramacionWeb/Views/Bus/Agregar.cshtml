@@ -12,7 +12,7 @@
 
 <h2>Agregar</h2>
 <div class="row col-md-6">
-    @using (Html.BeginForm("Agregar", "Bus", FormMethod.Post))
+    @using (Html.BeginForm("Agregar", "Bus", FormMethod.Post,new { @id="frmAgregar" }))
     {
         @Html.AntiForgeryToken()
 
@@ -31,7 +31,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.iidSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("iidSucursal",listaSucursal,null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("iidSucursal", listaSucursal, null, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.iidSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.iidTipoBus, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("iidTipoBus",listaTipoBus,null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("iidTipoBus", listaTipoBus, null, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.iidTipoBus, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.iidMoelo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("iidMoelo",listaModelo,null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("iidMoelo", listaModelo, null, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.iidMoelo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -98,7 +98,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.iidMarca, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("iidMarca",listaMarca,null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("iidMarca", listaMarca, null, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.iidMarca, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -131,12 +131,59 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <button id="myInput" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                        Guardar
+                    </button>
+                    @Html.ActionLink("Regresar", "Index", "Bus", null, new { @class = "btn btn-danger" })
                 </div>
             </div>
         </div>
     }
 </div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalConfirm" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">¿Desea guardar los cambios?</h1>
+                <button type="button" onclick="Cancelar()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div style="padding:1em">
+                <button type="button" onclick="Cancelar()" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Agregar()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+
+  //MOSTRAR EL MODAL DE CONFIRMACIÓN
+
+
+        $("#myInput").click(function () {
+            $("#modalConfirm").modal('show');
+        });
+   
+
+    function Agregar() {
+        var frmAgregar = document.getElementById("frmAgregar");
+
+        frmAgregar.submit();
+    }
+
+
+    //CERRAR EL MODAL
+    function Cancelar() {
+        $("#modalConfirm").modal('hide');
+    }
+
+
+
+
+
+</script>
