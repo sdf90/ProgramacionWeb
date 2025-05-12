@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        @using (Html.BeginForm("Editar", "Sucursal", FormMethod.Post))
+        @using (Html.BeginForm("Editar", "Sucursal", FormMethod.Post,new { @id="frmSucursal"}))
         {
             <div>
                 @Html.LabelFor(p => p.iidsucusal)
@@ -48,9 +48,24 @@
             </div>
 
             <div style="margin:auto">
-                <input type="submit" value="Enviar" />
+                <input type="submit" value="Enviar" class="btn btn-primary" />
+                @Html.ActionLink("Vovler","Index","Sucursal",null,new { @class="btn btn-danger"})
             </div>
 
         }
     </div>
 </div>
+<script>
+    //MOSTRAR UNA MENSAJE DE CONFIRMACIÓN ANTES DE GUARDAR LOS CAMBIOS
+    var frmSucursal = document.getElementById("frmSucursal");
+    frmSucursal.onsubmit = function (e) {
+
+        e.preventDefault();
+        if (confirm("¿Desea guardar los cambios?") == 1) {
+
+            frmSucursal.submit();
+        }
+
+    }
+
+</script>

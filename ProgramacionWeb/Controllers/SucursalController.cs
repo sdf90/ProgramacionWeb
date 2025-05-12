@@ -80,13 +80,39 @@ namespace ProgramacionWeb.Controllers
                 oSucursalCLS.telefono = oSucurcal.TELEFONO;
                 oSucursalCLS.fechaApertura = (DateTime)oSucurcal.FECHAAPERTURA;
 
-
-
-
             }
 
 
             return View(oSucursalCLS);
+        }
+
+
+        [HttpPost]
+        public ActionResult Editar(SucursalCLS oSucucrsalCls)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(oSucucrsalCls);
+            }
+
+            int idSucursal = oSucucrsalCls.iidsucusal;
+            using(var bd = new BDPasajeEntities())
+            {
+                Sucursal oSucursal = bd.Sucursal.Where(p => p.IIDSUCURSAL.Equals(idSucursal)).First();
+
+                oSucursal.NOMBRE = oSucucrsalCls.nombre;
+                oSucursal.IIDSUCURSAL = oSucucrsalCls.iidsucusal;
+                oSucursal.DIRECCION = oSucucrsalCls.direccion;
+                oSucursal.TELEFONO = oSucucrsalCls.telefono;
+                oSucursal.EMAIL = oSucucrsalCls.email;
+                oSucursal.FECHAAPERTURA = oSucucrsalCls.fechaApertura;
+
+                bd.SaveChanges();
+
+
+            }
+
+            return RedirectToAction("Index");
         }
 
 

@@ -11,7 +11,7 @@
     <div class="col-md-6">
 
         @*Formulario que mandara nuestra información al método Agregar de POST*@
-        @using (Html.BeginForm("Editar", "Marca", FormMethod.Post))
+        @using (Html.BeginForm("Editar", "Marca", FormMethod.Post, new { @id ="frmEditar"}))
         {
 
             <div>
@@ -41,9 +41,23 @@
 
             <div style="margin:auto">
                 <input type="submit" class="btn btn-primary" value="Guardar" />
+                @Html.ActionLink(" Volver","Index","Marca",null,new {@class ="btn btn-danger"})
             </div>
 
         }
     </div>
 
 </div>
+
+<script>
+    //MOSTRAR UN MENSAJE CUANDO PULSAMOS EL BOTÓN GUARDAR
+    var frmEditar = document.getElementById("frmEditar");
+    frmEditar.onsubmit = function (e) {
+        //Evitamos que al pulsar el botón de guardar haga algo el formulario
+        e.preventDefault();
+
+        if (confirm("¿Deseas guardar los cambios?") == 1) {
+            frmEditar.submit();
+        }
+    }
+</script>

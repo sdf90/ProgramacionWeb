@@ -50,6 +50,41 @@ namespace ProgramacionWeb.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Agregar(BusCLS oBusCls)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(oBusCls);
+            }
+
+
+            using(var bd = new BDPasajeEntities())
+            {
+
+                Bus oBus = new Bus();
+
+                oBus.BHABILITADO = 1;
+                oBus.IIDSUCURSAL = oBusCls.iidSucursal;
+                oBus.IIDTIPOBUS = oBusCls.iidTipoBus;
+                oBus.PLACA = oBusCls.placa;
+                oBus.FECHACOMPRA = oBusCls.fechaCompra;
+                oBus.IIDMODELO = oBusCls.iidMoelo;
+                oBus.NUMEROFILAS = oBusCls.numeroFilas;
+                oBus.NUMEROCOLUMNAS = oBusCls.numeroColumnas;
+                oBus.DESCRIPCION = oBusCls.descripcion;
+                oBus.OBSERVACION = oBusCls.observacion;
+                oBus.IIDMARCA = oBusCls.iidMarca;
+
+                bd.Bus.Add(oBus);
+                bd.SaveChanges();
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
         //Metodos para listar datos en los ComboBox
         public void listarTicoBus()
         {
