@@ -22,6 +22,7 @@ namespace ProgramacionWeb.Models
 
         [Display(Name = "Precio")]
         [Required]
+        [Range(0,100000,ErrorMessage ="Rango fuera de indices")]
         public double precio { get; set; }
 
 
