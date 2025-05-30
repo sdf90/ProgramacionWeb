@@ -113,8 +113,21 @@ namespace ProgramacionWeb.Controllers
 
                 return RedirectToAction("Index");
 
-
         }
 
-    }
+
+        //Eliminar Marca
+
+        public ActionResult Eliminar(int id){
+
+            using(var bd = new BDPasajeEntities())
+            {
+                Marca oMarca = bd.Marca.Where(p => p.IIDMARCA.Equals(id)).First();
+                oMarca.BHABILITADO = 0;
+                bd.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+
+        }
 }
