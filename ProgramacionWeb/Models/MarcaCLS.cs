@@ -24,6 +24,8 @@ namespace ProgramacionWeb.Models
 
         public int bhabilitado { get; set; }
 
+        //añadir una propiedad(errores de la validación)
+        public string mensajeError { get; set; }
 
 
     }

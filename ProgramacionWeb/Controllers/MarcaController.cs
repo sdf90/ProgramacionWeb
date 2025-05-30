@@ -46,9 +46,24 @@ namespace ProgramacionWeb.Controllers
         [HttpPost]
         public ActionResult Agregar(MarcaCLS oMarcaCLS)
         {
-            //Comprobar si no hay errores en el formulario
-            if (!ModelState.IsValid)
+            //Comrobar si ya existe una marca con el mismo nombre
+            int nregistrosEncontrados = 0;
+            string nombreMarca = oMarcaCLS.nombre;
+            using(var bd = new BDPasajeEntities())
             {
+                nregistrosEncontrados = bd.Marca.Where(p=> p.NOMBRE.Equals(nombreMarca) && p.BHABILITADO == 1).Count();
+            }
+
+
+            //Comprobar si no hay errores en el formulario
+            if (!ModelState.IsValid || nregistrosEncontrados >=1)
+            {
+                if(nregistrosEncontrados >= 1)
+                {
+                    //Si ya existe una marca con el mismo nombre, asignamos un mensaje de error
+                    oMarcaCLS.mensajeError = "Ya existe una marca con el mismo nombre";
+                }
+               
                 //Si hay error volvemos  a la página
                 return View(oMarcaCLS);
             }
